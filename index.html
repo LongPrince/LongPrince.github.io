@@ -3,134 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đang tải...</title>
-
-    <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        body{
-            background:#000;
-            color:#fff;
-            font-family:Arial, Helvetica, sans-serif;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-            overflow:hidden;
-        }
-
-        #start-btn{
-            padding:15px 35px;
-            font-size:20px;
-            font-weight:bold;
-            border:none;
-            border-radius:40px;
-            background:#ff0055;
-            color:#fff;
-            cursor:pointer;
-            box-shadow:0 0 20px rgba(255,0,85,.6);
-            transition:.3s;
-        }
-
-        #start-btn:hover{
-            transform:scale(1.08);
-            box-shadow:0 0 30px rgba(255,0,85,.9);
-        }
-
-        #loading-content{
-            display:none;
-            text-align:center;
-        }
-
-        p{
-            font-size:22px;
-            margin-bottom:20px;
-            font-weight:bold;
-        }
-
-        /* Loading Spinner */
-        .spinner{
-            width:70px;
-            height:70px;
-            margin:20px auto 30px;
-            border:7px solid rgba(255,255,255,.15);
-            border-top:7px solid #ff0055;
-            border-right:7px solid #00e5ff;
-            border-radius:50%;
-            animation:spin .8s linear infinite;
-            box-shadow:0 0 20px rgba(255,0,85,.6);
-        }
-
-        @keyframes spin{
-            from{
-                transform:rotate(0deg);
-            }
-            to{
-                transform:rotate(360deg);
-            }
-        }
-
-        video{
-            height:300px;
-            border-radius:15px;
-            box-shadow:0 0 25px rgba(255,255,255,.15);
-        }
-    </style>
+    <title>Mở Thư</title>
+    <!-- Nhúng CSS phong cách cổ điển -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<button id="start-btn">
-    BẤM VÀO ĐỂ VÀO TRANG
-</button>
+    <!-- Lớp phủ chuyển trang mượt mà -->
+    <div class="transition-overlay" id="overlay"></div>
 
-<div id="loading-content">
+    <div class="main-container">
+        <!-- Dấu mộc bưu điện -->
+        <img src="asset/postage mark_vector.png" alt="Postage Stamp" class="postage-stamp">
 
-    <p>Đang tải, vui lòng đợi...</p>
+        <!-- Container Phong bì -->
+        <div class="envelope-container" id="envelope">
+            <!-- Ảnh phong bì đóng/mở -->
+            <img src="asset/letter_close.png" alt="Envelope" class="envelope-img" id="envelope-img">
+            
+            <!-- Vệt màu nền cọ quét -->
+            <div class="brush-stroke"></div>
 
-    <!-- Icon loading -->
-    <div class="spinner"></div>
+            <!-- Cành hoa khô đè lên -->
+            <img src="asset/hoa.png" alt="Dried Flower Decor" class="flower-on-envelope" id="flower-decor">
 
-  <img src="asset/download (1).gif" type="khabanh_gif" height="300px" width="300px">
-  
+            <!-- Băng keo dán trang trí -->
+            <div class="washi-tape-green"></div>
+            <div class="washi-tape-beige"></div>
+        </div>
 
+        <!-- Dòng chữ gợi ý mở thư -->
+        <div class="action-text" id="action-text">Nhấn vào để mở thư</div>
+    </div>
+
+    <!-- Nhạc nền phát khi click mở thư -->
     <audio id="bg-audio" loop>
         <source src="asset/intro.mp3" type="audio/mp3">
     </audio>
 
-</div>
+    <script>
+        const envelope = document.getElementById('envelope');
+        const envelopeImg = document.getElementById('envelope-img');
+        const actionText = document.getElementById('action-text');
+        const audio = document.getElementById('bg-audio');
+        const overlay = document.getElementById('overlay');
 
-<script>
+        let isOpened = false;
 
-const startBtn = document.getElementById("start-btn");
-const loadingContent = document.getElementById("loading-content");
-const audio = document.getElementById("bg-audio");
+        function openLetter() {
+            if (isOpened) return;
+            isOpened = true;
 
-startBtn.addEventListener("click",()=>{
+            // Thêm hiệu ứng click nhẹ
+            envelope.classList.add('opening');
 
-    // Ẩn nút
-    startBtn.style.display="none";
+            setTimeout(() => {
+                envelope.classList.remove('opening');
+                envelope.classList.add('open');
+                
+                // Thay đổi hình ảnh sang phong bì mở
+                envelopeImg.src = 'asset/letter_open.png';
+                actionText.textContent = 'Đang mở thư...';
 
-    // Hiện loading
-    loadingContent.style.display="block";
+                // Phát nhạc nền (vì người dùng đã click nên trình duyệt sẽ cho phép phát nhạc)
+                audio.play().then(() => {
+                    // Lưu trạng thái âm thanh để trang tiếp theo biết âm thanh đang phát
+                    localStorage.setItem('audioPlaying', 'true');
+                    localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                }).catch(err => {
+                    console.log("Audio play failed/blocked:", err);
+                });
 
-    // Phát nhạc
-    audio.play().catch(err=>{
-        console.log(err);
-    });
+                // Chờ hiệu ứng chuyển động hoàn tất rồi kích hoạt chuyển trang
+                setTimeout(() => {
+                    // Kích hoạt overlay chuyển trang mượt mà
+                    overlay.classList.add('active');
+                    
+                    // Chuyển hướng sang trang loading
+                    setTimeout(() => {
+                        window.location.href = 'loading.html';
+                    }, 800); // Đợi overlay mờ dần
+                }, 1200);
 
-    // Chuyển trang sau 6 giây
-    setTimeout(()=>{
-        window.location.href="index_1.html";
-    },6000);
+            }, 150);
+        }
 
-});
-
-</script>
-
+        // Đăng ký sự kiện click cho cả phong bì và dòng chữ
+        envelope.addEventListener('click', openLetter);
+        actionText.addEventListener('click', openLetter);
+    </script>
 </body>
 </html>
