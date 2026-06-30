@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đang tải...</title>
+    <!-- Nhúng CSS phong cách cổ điển -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Lớp phủ chuyển trang mượt mà -->
+    <div class="transition-overlay active" id="overlay"></div>
+
+    <!-- Hoa trang trí góc trên bên phải -->
+    <img src="asset/rose-sunflower-stickers-pack 1.png" alt="Sunflower Decor" class="sunflower-corner">
+
+    <!-- Hoa trang trí góc dưới bên trái -->
+    <img src="asset/hoa.png" alt="Dried Flower Decor" class="dried-flower-corner">
+
+    <!-- Vùng tải trung tâm -->
+    <div class="loading-wrapper">
+        <!-- Spinner Loading kiểu iOS -->
+        <div class="ios-spinner">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+        </div>
+
+        <!-- Câu trích dẫn bằng font Arbutus Slab -->
+        <p class="quote-text">“Mình ăn bát cơm thì phải cho em mình ăn bát cháo”</p>
+
+        <!-- Video Khá Bảnh nhảy viền xanh dương phát sáng -->
+        <div class="video-container">
+            <video class="khabanh-video" autoplay loop muted playsinline id="khabanh-video">
+                <source src="asset/khabanh_01.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+        </div>
+    </div>
+
+    <!-- Nhạc nền được tiếp tục phát từ trang trước -->
+    <audio id="bg-audio" loop>
+        <source src="asset/intro.mp3" type="audio/mp3">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('bg-audio');
+        const overlay = document.getElementById('overlay');
+
+        // Khi trang web tải xong, ẩn overlay mờ dần
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 100);
+
+            // Kiểm tra xem nhạc có đang phát ở trang trước không và tiếp tục phát
+            const audioPlaying = localStorage.getItem('audioPlaying');
+            const savedTime = localStorage.getItem('audioCurrentTime');
+
+            if (audioPlaying === 'true') {
+                if (savedTime) {
+                    audio.currentTime = parseFloat(savedTime);
+                }
+                audio.play().catch(err => {
+                    console.log("Audio resume blocked by browser. Attempting play on user action:", err);
+                    // Nếu bị chặn, sẽ đợi click nhẹ của người dùng trên trang để phát lại (phòng hờ)
+                    document.body.addEventListener('click', () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            } else {
+                // Nếu chưa phát, thử tự động phát
+                audio.play().catch(err => {
+                    console.log("Autoplay blocked:", err);
+                });
+            }
+
+            // Tự động lưu thời gian nhạc đang chạy liên tục
+            const timeUpdater = setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                }
+            }, 500);
+
+            // Chuyển hướng sang trang index_1.html sau 6 giây
+            setTimeout(() => {
+                // Kích hoạt overlay chuyển trang mượt mà trước khi chuyển hướng
+                overlay.classList.add('active');
+                
+                setTimeout(() => {
+                    clearInterval(timeUpdater);
+                    window.location.href = 'index_1.html';
+                }, 800); // Chờ hiệu ứng mờ dần
+            }, 6000);
+        });
+    </script>
+</body>
+</html>
