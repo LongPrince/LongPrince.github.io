@@ -31,18 +31,19 @@
         <p class="quote-text">“Mình ăn bát cơm thì phải cho em mình ăn bát cháo”</p>
 
         <!-- Video Khá Bảnh nhảy viền xanh dương phát sáng -->
-        <div class="video-container">
+        <!-- <div class="video-container">
             <video class="khabanh-video" autoplay loop muted playsinline id="khabanh-video">
                 <source src="asset/khabanh_01.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
+        </div> -->
+        <div>
+            <img src="asset/klhabanh_gif.gif" alt="khabanh_gif" height="300px" > 
         </div>
     </div>
 
-    <!-- Nhạc nền được tiếp tục phát từ trang trước -->
-    <audio id="bg-audio" loop>
-        <source src="asset/intro.mp3" type="audio/mp3">
-    </audio>
+    <!-- Nhạc nền chạy ngầm -->
+    <audio id="bg-audio" src="asset/intro_nhacke.MP3" loop></audio>
 
     <script>
         const audio = document.getElementById('bg-audio');
@@ -81,9 +82,9 @@
                 if (!audio.paused) {
                     localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
                 }
-            }, 500);
+            }, 1000);
 
-            // Chuyển hướng sang trang index_1.html sau 6 giây
+            // Chuyển hướng sang trang index_1.html sau 10 giây
             setTimeout(() => {
                 // Kích hoạt overlay chuyển trang mượt mà trước khi chuyển hướng
                 overlay.classList.add('active');
@@ -92,7 +93,7 @@
                     clearInterval(timeUpdater);
                     window.location.href = 'index_1.html';
                 }, 800); // Chờ hiệu ứng mờ dần
-            }, 6000);
+            }, 10000);
         });
     </script>
 </body>

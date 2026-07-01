@@ -362,3 +362,306 @@ body {
     opacity: 1;
     pointer-events: all;
 }
+
+/* ==========================================================================
+   TRANG FORM - INDEX_1.HTML
+   ========================================================================== */
+
+/* Tiêu đề góc trên bên trái */
+.form-title-decor {
+    position: absolute;
+    left: 20px;
+    top: 25px;
+    width: 320px;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.05));
+}
+
+/* Con tem góc trên bên phải */
+.form-stamp-decor {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+    width: 85px;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.1));
+}
+
+/* Hoa góc dưới bên trái */
+.form-flower-left-decor {
+    position: absolute;
+    left: -20px;
+    bottom: -30px;
+    width: 200px;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    transform: rotate(-10deg);
+    transform-origin: bottom left;
+    filter: drop-shadow(5px 0 15px rgba(0, 0, 0, 0.05));
+    animation: swayDriedFlower 12s infinite ease-in-out;
+}
+
+/* Hoa góc dưới bên phải */
+.form-flower-right-decor {
+    position: absolute;
+    right: -10px;
+    bottom: -20px;
+    width: 260px;
+    height: auto;
+    pointer-events: none;
+    z-index: 5;
+    transform: rotate(5deg);
+    transform-origin: bottom right;
+    filter: drop-shadow(-5px 0 15px rgba(0, 0, 0, 0.05));
+    animation: swaySunflower 10s infinite ease-in-out;
+}
+
+/* Khung bọc form ở giữa */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 520px;
+    z-index: 10;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Tiêu đề form */
+.form-heading {
+    font-family: var(--text-typewriter);
+    color: #554838;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 35px;
+    letter-spacing: 0.5px;
+    word-break: keep-all;
+}
+
+/* Nội dung form */
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+/* Nhóm nhập liệu */
+.input-group {
+    width: 100%;
+    max-width: 420px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 26px;
+    font-family: var(--text-typewriter);
+    font-size: 16px;
+    color: var(--color-dark);
+    background-color: #d6d6d6;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: #7a7a7a;
+}
+
+.input-group input:focus {
+    background-color: #cecece;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.08);
+}
+
+/* Nút Tiếp tục */
+.btn-submit {
+    font-family: var(--text-typewriter);
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: var(--color-red);
+    padding: 12px 36px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(163, 29, 29, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #8c1717;
+    box-shadow: 0 6px 12px rgba(163, 29, 29, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   CSS RESPONSIVE CHO PC & MOBILE
+   ========================================================================== */
+
+/* 1. Thiết bị màn hình vừa và nhỏ (Tablet & Mobile) */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* Cho phép cuộn trang theo chiều dọc trên điện thoại màn hình nhỏ để tránh mất nội dung */
+    }
+
+    /* TRANG 1 - INDEX.HTML */
+    .envelope-container {
+        width: 300px;
+    }
+    
+    .flower-on-envelope {
+        height: 190px;
+    }
+    
+    .action-text {
+        font-size: 20px;
+        margin-top: 35px;
+    }
+    
+    .postage-stamp {
+        width: 130px;
+        margin-bottom: 25px;
+    }
+
+    /* TRANG 2 - LOADING.HTML */
+    .sunflower-corner {
+        width: 160px;
+        right: -20px;
+        top: -20px;
+    }
+    
+    .dried-flower-corner {
+        width: 140px;
+        left: -15px;
+        bottom: -20px;
+    }
+
+    .loading-wrapper {
+        width: 95%;
+        max-width: 450px;
+    }
+
+    .quote-text {
+        font-size: 16px;
+        margin-bottom: 25px;
+        max-width: 320px;
+    }
+
+    .loading-wrapper img {
+        height: 220px !important;
+        width: auto;
+    }
+
+    /* TRANG 3 - INDEX_1.HTML */
+    .form-title-decor {
+        width: 240px;
+        left: 15px;
+        top: 20px;
+    }
+
+    .form-stamp-decor {
+        width: 65px;
+        right: 20px;
+        top: 20px;
+    }
+
+    .form-flower-left-decor {
+        width: 130px;
+        left: -15px;
+        bottom: -20px;
+    }
+
+    .form-flower-right-decor {
+        width: 180px;
+        right: -10px;
+        bottom: -15px;
+    }
+
+    .form-wrapper {
+        margin-top: 110px; /* Đẩy form xuống dưới để tránh đè lên tiêu đề và con tem */
+        margin-bottom: 50px;
+        max-width: 440px;
+    }
+
+    .form-heading {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .form-content {
+        gap: 15px;
+    }
+
+    .input-group input {
+        padding: 14px 22px;
+        font-size: 15px;
+    }
+
+    .btn-submit {
+        font-size: 16px;
+        padding: 10px 30px;
+        margin-top: 10px;
+    }
+}
+
+/* 2. Thiết bị di động siêu nhỏ (màn hình hẹp hơn 400px) */
+@media (max-width: 400px) {
+    .envelope-container {
+        width: 260px;
+    }
+
+    .flower-on-envelope {
+        height: 160px;
+    }
+
+    .action-text {
+        font-size: 18px;
+        margin-top: 25px;
+    }
+
+    .postage-stamp {
+        width: 110px;
+        margin-bottom: 20px;
+    }
+
+    .form-title-decor {
+        width: 190px;
+        left: 10px;
+        top: 15px;
+    }
+
+    .form-stamp-decor {
+        width: 55px;
+        right: 15px;
+        top: 15px;
+    }
+
+    .form-wrapper {
+        margin-top: 90px;
+        max-width: 300px;
+    }
+
+    .form-heading {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .input-group input {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}

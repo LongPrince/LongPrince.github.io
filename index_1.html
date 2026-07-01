@@ -1,15 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nhập thông tin</title>
+    <!-- Nhúng CSS phong cách cổ điển -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Trang chủ</h1>
-    <img src="asset/download (1).gif" alt="kha_banh" width="300px" height="300px">
-    <audio autoplay controls>
-        <source src="asset/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3"type="audio/mp3"> 
-    </audio>
+
+    <!-- Lớp phủ chuyển trang mượt mà -->
+    <div class="transition-overlay active" id="overlay"></div>
+
+    <!-- Tiêu đề góc trên bên trái -->
+    <img src="asset/thumoi_vector.svg" alt="Thư mời Lễ Tốt Nghiệp" class="form-title-decor">
+
+    <!-- Con tem góc trên bên phải -->
+    <img src="asset/tem.svg" alt="Postage Stamp" class="form-stamp-decor">
+
+    <!-- Hoa góc dưới bên trái -->
+    <img src="asset/hoa.png" alt="Dried Flower Left" class="form-flower-left-decor">
+
+    <!-- Hoa góc dưới bên phải -->
+    <img src="asset/hoa_3.svg" alt="Dried Flower Right" class="form-flower-right-decor">
+
+    <!-- Vùng nhập thông tin -->
+    <div class="form-wrapper">
+        <h2 class="form-heading">Mới quý zị nhập thông tin</h2>
+
+        <form class="form-content" id="info-form">
+            <div class="input-group">
+                <input type="text" id="fullname" placeholder="Họ & tên" required>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="nickname" placeholder="Biệt danh" required>
+            </div>
+
+            <div class="input-group">
+                <input type="tel" id="phone" placeholder="Số điện thoại" required>
+            </div>
+
+            <button type="submit" class="btn-submit">Tiếp tục</button>
+        </form>
+    </div>
+
+    <!-- Nhạc nền chạy ngầm bài "Và Thế Giới Đã Mất Đi Một Người Cô Đơn" -->
+    <audio id="bg-audio" src="asset/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3" autoplay loop></audio>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const audio = document.getElementById('bg-audio');
+
+        // Khi trang web tải xong, ẩn overlay mờ dần
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 100);
+
+            // Thử tự động phát nhạc (trình duyệt có thể cho phép vì đã có tương tác từ trang trước)
+            audio.play().catch(err => {
+                console.log("Autoplay blocked by browser. Attempting play on user action:", err);
+                document.body.addEventListener('click', () => {
+                    audio.play();
+                }, { once: true });
+            });
+        });
+
+        // Xử lý sự kiện submit form (lưu thông tin vào localStorage)
+        const form = document.getElementById('info-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value;
+            const nickname = document.getElementById('nickname').value;
+            const phone = document.getElementById('phone').value;
+
+            // Lưu thông tin vào localStorage
+            localStorage.setItem('fullname', fullname);
+            localStorage.setItem('nickname', nickname);
+            localStorage.setItem('phone', phone);
+
+            // Kích hoạt overlay chuyển trang trước khi chuyển hướng
+            overlay.classList.add('active');
+            setTimeout(() => {
+                alert(`Cảm ơn ${fullname} (${nickname}) đã nhập thông tin!`);
+                overlay.classList.remove('active');
+            }, 800);
+        });
+    </script>
 </body>
+
 </html>
