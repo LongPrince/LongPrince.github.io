@@ -11,7 +11,8 @@
 # Audio files (MP3 nhỏ < 25MB vẫn được phép)
 # *.mp3
 *.wav
-*.ogg
+*.OGG
+
 
 # PDF files
 *.pdf
