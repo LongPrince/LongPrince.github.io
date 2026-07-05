@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- Nhúng CSS phong cách cổ điển -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- Lớp phủ chuyển trang mượt mà -->
@@ -22,9 +24,18 @@
     <div class="loading-wrapper">
         <!-- Spinner Loading kiểu iOS -->
         <div class="ios-spinner">
-            <div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
 
         <!-- Câu trích dẫn bằng font Arbutus Slab -->
@@ -40,7 +51,7 @@
     </div>
 
     <!-- Nhạc nền chạy ngầm -->
-    <audio id="bg-audio" src="asset/Music/intro_nhacke.MP3" loop></audio>
+    <audio id="bg-audio" src="asset/Music/intro_nhacke.ogg" loop></audio>
 
     <script>
         const audio = document.getElementById('bg-audio');
@@ -85,11 +96,11 @@
             // Chuyển hướng sang trang index_1.html sau 10 giây
             setTimeout(() => {
                 overlay.classList.add('active');
-                
+
                 // Đặt lại thời gian về 0 để trang sau phát bài hát mới từ đầu
                 localStorage.setItem('audioPlaying', 'true');
                 localStorage.setItem('audioCurrentTime', '0');
-                
+
                 setTimeout(() => {
                     clearInterval(timeUpdater);
                     window.location.href = 'index_1.html';
@@ -98,4 +109,5 @@
         });
     </script>
 </body>
+
 </html>
