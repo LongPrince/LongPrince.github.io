@@ -15,20 +15,20 @@
     <div class="transition-overlay active" id="overlay"></div>
 
     <!-- Tiêu đề góc trên bên trái -->
-    <img src="asset/thumoi_vector.svg" alt="Thư mời Lễ Tốt Nghiệp" class="form-title-decor">
+    <img src="asset/Webp/thumoi_vector.webp" alt="Thư mời Lễ Tốt Nghiệp" class="form-title-decor">
 
     <!-- Con tem góc trên bên phải -->
-    <img src="asset/tem.svg" alt="Postage Stamp" class="form-stamp-decor">
+    <img src="asset/Webp/sv428pz4cgnzkmfv9jfn.webp" alt="Postage Stamp" class="form-stamp-decor">
 
     <!-- Hoa góc dưới bên trái -->
-    <img src="asset/hoa.png" alt="Dried Flower Left" class="form-flower-left-decor">
+    <img src="asset/Webp/j8ejkadimxlopurzaex8.webp" alt="Dried Flower Left" class="form-flower-left-decor">
 
     <!-- Hoa góc dưới bên phải -->
-    <img src="asset/hoa_3.svg" alt="Dried Flower Right" class="form-flower-right-decor">
+    <img src="asset/Webp/rtzgwbevfjg04c2hnt3v.webp" alt="Dried Flower Right" class="form-flower-right-decor">
 
     <!-- Vùng nhập thông tin -->
     <div class="form-wrapper">
-        <h2 class="form-heading">Mới quý zị nhập thông tin</h2>
+        <h2 class="form-heading">Mời quý vị nhập thông tin</h2>
 
         <form class="form-content" id="info-form">
             <div class="input-group">
@@ -44,13 +44,19 @@
             </div>
 
             <button type="submit" class="btn-submit">Tiếp tục</button>
-            <br>
-            <img src="asset/klhabanh_gif.gif" height="200px" >
+
+            <div class="video-container" style="margin-top: 15px;">
+                <video class="khabanh-video" autoplay loop muted playsinline
+                    style="width: 120px; height: 170px; border-radius: 12px;">
+                    <source src="asset/Video/khabanh_video.webm" type="video/webm">
+                </video>
+                <div class="video-overlay"></div>
+            </div>
         </form>
     </div>
 
     <!-- Nhạc nền chạy ngầm bài "Và Thế Giới Đã Mất Đi Một Người Cô Đơn" -->
-    <audio id="bg-audio" src="asset/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3" autoplay loop></audio>
+    <audio id="bg-audio" src="asset/Music/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3" loop></audio>
 
     <script>
         const overlay = document.getElementById('overlay');
@@ -62,16 +68,37 @@
                 overlay.classList.remove('active');
             }, 100);
 
-            // Thử tự động phát nhạc (trình duyệt có thể cho phép vì đã có tương tác từ trang trước)
-            audio.play().catch(err => {
-                console.log("Autoplay blocked by browser. Attempting play on user action:", err);
-                document.body.addEventListener('click', () => {
-                    audio.play();
-                }, { once: true });
-            });
+            // Kiểm tra xem nhạc có đang phát ở trang trước không và tiếp tục phát
+            const audioPlaying = localStorage.getItem('audioPlaying');
+            const savedTime = localStorage.getItem('audioCurrentTime');
+
+            if (audioPlaying === 'true') {
+                if (savedTime) {
+                    audio.currentTime = parseFloat(savedTime);
+                }
+                audio.play().catch(err => {
+                    console.log("Audio resume blocked by browser. Attempting play on user action:", err);
+                    document.body.addEventListener('click', () => {
+                        audio.play();
+                    }, { once: true });
+                });
+            } else {
+                audio.play().then(() => {
+                    localStorage.setItem('audioPlaying', 'true');
+                }).catch(err => {
+                    console.log("Autoplay blocked:", err);
+                });
+            }
+
+            // Tự động lưu thời gian nhạc đang chạy liên tục
+            const timeUpdater = setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                }
+            }, 1000);
         });
 
-        // Xử lý sự kiện submit form (lưu thông tin vào localStorage)
+        // Xử lý sự kiện submit form (lưu thông tin vào localStorage và chuyển trang)
         const form = document.getElementById('info-form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -87,8 +114,7 @@
             // Kích hoạt overlay chuyển trang trước khi chuyển hướng
             overlay.classList.add('active');
             setTimeout(() => {
-                alert(`Cảm ơn ${fullname} (${nickname}) đã nhập thông tin!`);
-                overlay.classList.remove('active');
+                window.location.href = 'index_2.html';
             }, 800);
         });
     </script>

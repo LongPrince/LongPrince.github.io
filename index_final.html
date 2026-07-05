@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cảm ơn bạn đã đến - Lễ Tốt Nghiệp</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="transition-overlay active" id="overlay"></div>
+
+
+    <div class="final2-container">
+
+        <!-- Header: Logo thư mời trái + postage stamp phải -->
+        <div class="final2-header">
+            <img src="asset/Webp/thumoi_vector.webp"
+                alt="Graduation invitation graphic with floral details and ceremony wording" class="thumoi-vector"
+                style="max-width: 180px; height: auto;">
+            <div> <img src="asset/Webp/postage mark_vector.webp"
+                    alt="Decorative postage style stamp graphic accenting the invitation layout" class="final2-stamp"
+                    style="width: 110px; height: auto; opacity: 0.85; filter: grayscale(0.1) contrast(1.05); transform: scale(1.1); transform-origin: center;">
+            </div>
+
+        </div>
+
+        <!-- Đoạn văn mô tả -->
+        <p class="final2-title">Thank you</p>
+        <p class="final2-title">for comming !</p>
+        <p class="final2-desc" style="text-align: justify; margin-top: 20px; margin-bottom: 25px;">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian
+            at St Bride Printing Library in London, took a 1914 Cicero translation and scrambled it to make dummy text
+            for Letraset's
+        </p>
+
+
+        <!-- Ảnh tập thể lớp (Collage chứa đầy đủ ảnh sinh viên thật và trang trí) -->
+        <div class="final-group-photo" style="width: 100%; margin-bottom: 20px; z-index: 10;">
+            <img src="asset/Webp/anh tap the.svg"
+                alt="Graduating class group photo collage showing students gathered in celebration"
+                class="final-group-img" style="width: 100%; height: auto;">
+        </div>
+
+        <!-- Khối chữ ký ở góc dưới bên phải -->
+        <div class="final2-signature" style="margin-top: 10px; margin-bottom: 15px;">
+            <p class="final2-sign-label" style="align-self: center; text-align: center;">Ký tên</p>
+            <img src="asset/Webp/Chuky 1.svg" alt="Signature graphic for Dang Van Long displayed above the printed name"
+                class="final2-sign-img" style="width: 110px; height: auto;">
+            <p class="final2-sign-name">Đặng Văn Long</p>
+        </div>
+
+        <!-- Hoa khô cúc to ở góc dưới bên trái của container -->
+        <img src="asset/Webp/tfbffueja7nqrdzvkaab.webp"
+            alt="Dried chrysanthemum flower accent positioned at the bottom left of the container"
+            class="final2-flower-bottom-left">
+
+        <!-- Nút quay lại viết thường màu xanh rêu -->
+        <div class="final2-btn-group">
+            <button class="btn-final btn-back-final" id="back-btn-final"
+                style="background-color: #3b5249; font-size: 11px; padding: 6px 20px; border-radius: 12px; border: none; color: white; cursor: pointer;">quay
+                lại</button>
+        </div>
+
+    </div>
+
+    <!-- Nhạc outro phát khi vào trang cuối -->
+    <audio id="outro-audio" src="asset/Music/outro.MP3"></audio>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const outroAudio = document.getElementById('outro-audio');
+        const backBtnFinal = document.getElementById('back-btn-final');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Tắt overlay khi trang tải xong
+            setTimeout(() => { overlay.classList.remove('active'); }, 100);
+
+            // Phát nhạc outro (không loop – chỉ phát một lần)
+            outroAudio.volume = 0;
+            outroAudio.play().then(() => {
+                // Fade in âm lượng dần dần trong 2 giây
+                let vol = 0;
+                const fadeIn = setInterval(() => {
+                    vol = Math.min(vol + 0.05, 1);
+                    outroAudio.volume = vol;
+                    if (vol >= 1) clearInterval(fadeIn);
+                }, 100);
+            }).catch(() => {
+                // Nếu trình duyệt chặn tự động phát, phát khi người dùng chạm màn hình
+                document.body.addEventListener('click', () => {
+                    outroAudio.play();
+                }, { once: true });
+            });
+
+            // Hiệu ứng mưa confetti hoa bay nhẹ khi trang mở
+            startPetalRain();
+
+            // Nút quay lại trang liên hệ
+            backBtnFinal.addEventListener('click', () => {
+                // Fade out nhạc outro trước khi chuyển trang
+                let vol = outroAudio.volume;
+                const fadeOut = setInterval(() => {
+                    vol = Math.max(vol - 0.05, 0);
+                    outroAudio.volume = vol;
+                    if (vol <= 0) {
+                        clearInterval(fadeOut);
+                        outroAudio.pause();
+                    }
+                }, 60);
+                overlay.classList.add('active');
+                // Khôi phục trạng thái nhạc chính để trang index_7 phát lại
+                localStorage.setItem('audioPlaying', 'true');
+                setTimeout(() => {
+                    window.location.href = 'index_7.html';
+                }, 800);
+            });
+        });
+
+        // ==========================================
+        // Hiệu ứng mưa cánh hoa / confetti nhẹ nhàng
+        // ==========================================
+        function startPetalRain() {
+            const colors = ['#e8c9a0', '#d4a878', '#c8b28a', '#b8906a', '#f0e0c8', '#dbc4a4'];
+            const shapes = ['●', '✿', '❋', '✦', '◈', '⬟'];
+            const container = document.body;
+            let count = 0;
+
+            const interval = setInterval(() => {
+                if (count >= 30) {
+                    clearInterval(interval);
+                    return;
+                }
+                const petal = document.createElement('div');
+                petal.classList.add('falling-petal');
+                petal.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (3 + Math.random() * 4) + 's';
+                petal.style.animationDelay = Math.random() * 0.5 + 's';
+                petal.style.color = colors[Math.floor(Math.random() * colors.length)];
+                petal.style.fontSize = (12 + Math.random() * 10) + 'px';
+                petal.style.opacity = (0.5 + Math.random() * 0.5).toFixed(2);
+                container.appendChild(petal);
+
+                // Xóa phần tử sau khi rơi xong
+                petal.addEventListener('animationend', () => petal.remove());
+                count++;
+            }, 200);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn sử dụng - Địa điểm & Sơ đồ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="transition-overlay active" id="overlay"></div>
+
+    <div class="page4-layout-container">
+        <!-- Header giống trang 3 -->
+        <div class="header-decor">
+            <img src="asset/Webp/thumoi_vector.webp" alt="Thư mời Lễ Tốt Nghiệp" class="thumoi-vector">
+        </div>
+
+        <h1 class="main-title-page4">Hướng dẫn sử dụng</h1>
+
+        <!-- Mục 1: Địa điểm -->
+        <div class="page4-section">
+            <h2 class="section-heading-page4">1. Địa điểm</h2>
+            
+            <!-- Khối địa điểm 1: Chữ trái, Ảnh phải -->
+            <div class="location-block-1">
+                <div class="location-text text-left-block">
+                    Học viện Âm nhạc Huế - Nhà hát Sông Hương<br>
+                    1 Lê Lợi, Thuận Hóa, Huế, Việt Nam
+                </div>
+                <div class="polaroid-wrapper rot-right">
+                    <img src="asset/Webp/zjixblkorbdhltkadjxi.webp" alt="Nhà hát Sông Hương Flycam" class="polaroid-img">
+                </div>
+            </div>
+
+            <!-- Khối địa điểm 2: Ảnh trái, Chữ phải -->
+            <div class="location-block-2">
+                <div class="polaroid-wrapper rot-left">
+                    <img src="asset/Webp/71.webp" alt="Bản đồ vệ tinh Nhà hát Sông Hương" class="polaroid-img">
+                </div>
+                <div class="location-text text-right-block">
+                    Học viện Âm nhạc Huế - Nhà hát Sông Hương<br>
+                    1 Lê Lợi, Thuận Hóa, Huế, Việt Nam
+                </div>
+                <!-- Decor bông hoa vàng nhỏ bên phải khối 2 -->
+                <img src="asset/Webp/gwyukdkn2irogb5fijrb.webp" alt="Hoa vàng nhỏ decor" class="decor-yellow-flower">
+            </div>
+
+            <!-- Nhánh lá xanh nằm ngang decor dưới mục 1 -->
+            <div class="green-leaf-divider">
+                <img src="asset/Webp/bcrn7kyxralsfqhrvlcy.webp" alt="Nhánh lá xanh" class="leaf-divider-img">
+            </div>
+        </div>
+
+        <!-- Mục 2: Sơ đồ chỗ ngồi -->
+        <div class="page4-section">
+            <h2 class="section-heading-page4">2. Sơ đồ chỗ ngồi</h2>
+            <div class="sodo-container">
+                <img src="asset/Webp/sodo.svg" alt="Sơ đồ chỗ ngồi Nhà hát Sông Hương" class="sodo-img">
+            </div>
+            <!-- Decor chiếc lá khô vàng nghiêng dưới sơ đồ -->
+            <div class="decor-leaf-yellow-container">
+                <img src="asset/Webp/vtuyht1usy25vajclqv2.webp" alt="Lá vàng khô decor" class="decor-leaf-yellow">
+            </div>
+        </div>
+
+        <!-- Mục 3: Check-in -->
+        <div class="page4-section">
+            <h2 class="section-heading-page4">3. Check in tại đây nè má !</h2>
+            <p class="checkin-desc">Vì hội trường ta hơi bé nên khả năng cao sẽ rất khó tìm nơi check in ở đây nhé</p>
+            
+            <div class="checkin-grid">
+                <div class="checkin-item">
+                    <div class="checkin-img-wrapper">
+                        <img src="asset/Webp/hspznbui5lak25ufphwd.webp" alt="Sảnh trung tâm" class="checkin-img">
+                    </div>
+                    <span class="checkin-label">Sảnh trung tâm</span>
+                </div>
+                <div class="checkin-item">
+                    <div class="checkin-img-wrapper">
+                        <img src="asset/Webp/ssnbubz8s1aeicahsfea.webp" alt="Cánh ra trái" class="checkin-img">
+                    </div>
+                    <span class="checkin-label">Cánh ra trái</span>
+                </div>
+                <div class="checkin-item">
+                    <div class="checkin-img-wrapper">
+                        <img src="asset/Webp/tfbffueja7nqrdzvkaab.webp" alt="Cửa ra phải" class="checkin-img">
+                    </div>
+                    <span class="checkin-label">Cửa ra phải</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nhóm nút điều hướng -->
+        <div class="button-group-page4">
+            <button class="btn-page4 btn-back" id="back-btn">Quay lại</button>
+            <button class="btn-page4 btn-next" id="next-btn-4">Tiếp tục</button>
+        </div>
+
+        <!-- Decor bông hoa khô 3 nhánh ở dưới cùng trang -->
+        <div class="bottom-flower-decor-container">
+            <img src="asset/Webp/n8dghp17hgbb5itj4xgg.webp" alt="Hoa khô 3 nhánh decor" class="bottom-flower-decor">
+        </div>
+    </div>
+
+    <!-- Tệp nhạc nền phát tiếp từ trang trước -->
+    <audio id="bg-audio" src="asset/Music/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3" loop></audio>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const audio = document.getElementById('bg-audio');
+        const backBtn = document.getElementById('back-btn');
+        const nextBtn4 = document.getElementById('next-btn-4');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Tắt hiệu ứng phủ màn hình khi tải xong
+            setTimeout(() => { overlay.classList.remove('active'); }, 100);
+
+            // Xử lý nhạc nền phát tiếp từ trang trước
+            const savedTime = localStorage.getItem('audioCurrentTime');
+            const audioPlaying = localStorage.getItem('audioPlaying');
+
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            if (audioPlaying === 'true') {
+                audio.play().catch(() => {
+                    document.body.addEventListener('click', () => { audio.play(); }, { once: true });
+                });
+            }
+
+            // Đồng bộ thời gian nhạc liên tục
+            const timeUpdater = setInterval(() => {
+                if (!audio.paused) {
+                    localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                }
+            }, 1000);
+
+            // Nút quay lại trang index_3.html
+            backBtn.addEventListener('click', () => {
+                localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    clearInterval(timeUpdater);
+                    window.location.href = 'index_3.html';
+                }, 800);
+            });
+
+            // Nút tiếp tục sang trang liên hệ index_7.html
+            nextBtn4.addEventListener('click', () => {
+                localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    clearInterval(timeUpdater);
+                    window.location.href = 'index_7.html';
+                }, 800);
+            });
+        });
+    </script>
+</body>
+
+</html>

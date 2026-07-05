@@ -399,8 +399,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
-    filter: drop-shadow(0 0 15px rgba(0, 110, 255, 0.7));
+
+
 }
 
 .khabanh-video {
@@ -408,7 +408,7 @@ body {
     height: 100%;
     object-fit: cover;
     mix-blend-mode: multiply;
-    border-radius: 12px;
+
 }
 
 .video-overlay {
@@ -417,8 +417,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 110, 255, 0.2);
+
+
     pointer-events: none;
 }
 
@@ -1183,30 +1183,12 @@ body {
     text-align: center;
 }
 
-/* Hiệu ứng Polaroid cổ điển */
+/* Khung ảnh địa điểm đơn giản (không viền Polaroid) */
 .polaroid-wrapper {
     width: 45%;
-    background: #ffffff;
-    padding: 8px 8px 22px 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-    border-radius: 2px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
-}
-
-.polaroid-wrapper::before {
-    /* Đính cúc ghim màu vàng lên ảnh */
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 22px;
-    background-image: url('asset/Webp/gedjedtllj1vmftckxgt.webp');
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: 12;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .polaroid-img {
@@ -1215,20 +1197,15 @@ body {
     display: block;
     object-fit: cover;
     aspect-ratio: 1.15 / 1;
+    border-radius: 4px;
 }
 
 .rot-right {
-    transform: rotate(5deg);
+    transform: none;
 }
 
 .rot-left {
-    transform: rotate(-6deg);
-}
-
-.polaroid-wrapper:hover {
-    transform: scale(1.05) rotate(0deg);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
-    z-index: 15;
+    transform: none;
 }
 
 /* Hoa cúc vàng lơ lửng decor bên phải khối 2 */
@@ -1376,7 +1353,8 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 50px;
+    margin-bottom: -50px;
     pointer-events: none;
 }
 
@@ -1513,15 +1491,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Card liên hệ chính
-.contact-card {
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 16px;
-    padding: 20px 24px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
-    margin-bottom: 20px;
-    backdrop-filter: blur(4px);
-} */
 
 .contact-name {
     font-family: var(--text-typewriter);
@@ -1703,194 +1672,6 @@ body {
     filter: brightness(1.12);
 }
 
-/* ==========================================================================
-   TRANG CUỐI - INDEX_FINAL.HTML (CẢM ƠN + OUTRO)
-   ========================================================================== */
-
-.final-layout-container {
-    width: 100%;
-    max-width: 520px;
-    min-height: 100vh;
-    position: relative;
-    padding: 30px 20px 60px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 10;
-}
-
-/* Tiêu đề chính trang cuối */
-.final-main-title {
-    font-family: 'Beautique Display', 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-weight: 700;
-    font-size: 38px;
-    color: #1d3557;
-    text-align: center;
-    line-height: 1.25;
-    margin-bottom: 20px;
-    animation: fadeSlideUp 1s ease both;
-}
-
-/* Câu trích dẫn */
-.final-quote {
-    font-family: var(--text-typewriter);
-    font-size: 13px;
-    line-height: 1.8;
-    color: #5c3d2e;
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 25px;
-    animation: fadeSlideUp 1.2s ease both;
-}
-
-/* Tem bưu điện accent */
-.final-stamp-area {
-    margin-bottom: 20px;
-    animation: fadeSlideUp 1.4s ease both;
-}
-
-.final-stamp {
-    width: 70px;
-    height: auto;
-    opacity: 0.8;
-    filter: grayscale(0.15) contrast(1.1);
-}
-
-/* Ảnh tập thể dạng Polaroid lớn */
-.final-group-photo {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
-    animation: fadeSlideUp 1.5s ease both;
-}
-
-
-/* Khối chữ ký */
-.final-signature-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-    animation: fadeSlideUp 1.7s ease both;
-}
-
-.final-sign-label {
-    font-family: var(--text-typewriter);
-    font-size: 12px;
-    color: #5c3d2e;
-    margin-bottom: 6px;
-}
-
-.final-signature-img {
-    width: 100px;
-    height: auto;
-    margin-bottom: 6px;
-}
-
-.final-sign-name {
-    font-family: var(--text-typewriter);
-    font-size: 14px;
-    color: #1d3557;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-/* Hoa khô trang trí đáy */
-.final-bottom-decor {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 30px;
-    animation: fadeSlideUp 1.9s ease both;
-}
-
-.final-flower-l,
-.final-flower-r {
-    width: 55px;
-    height: auto;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
-}
-
-.final-flower-l {
-    transform: rotate(-15deg);
-}
-
-.final-flower-r {
-    transform: rotate(20deg) scaleX(-1);
-}
-
-.final-flower-c {
-    width: 45px;
-    height: auto;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.07));
-}
-
-/* Decor lá trang cuối (Cành hoa khô góc dưới bên trái vươn lên) */
-.final-leaf-left {
-    position: fixed;
-    bottom: -60px;
-    left: -40px;
-    width: 250px;
-    height: auto;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.9;
-    transform: rotate(10deg);
-    transform-origin: bottom left;
-    filter: drop-shadow(5px 0 15px rgba(0, 0, 0, 0.08));
-    animation: swayDriedFlower 12s infinite ease-in-out;
-}
-
-.final-leaf-right {
-    position: fixed;
-    bottom: -20px;
-    right: -20px;
-    width: 150px;
-    height: auto;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.8;
-    transform: rotate(-5deg) scaleX(-1);
-}
-
-/* Nút quay lại trang cuối */
-.button-group-final {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    z-index: 10;
-    position: relative;
-    animation: fadeSlideUp 2s ease both;
-}
-
-.btn-final {
-    font-family: var(--text-typewriter);
-    font-size: 12px;
-    font-weight: bold;
-    color: #ffffff;
-    padding: 7px 28px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.15s ease, filter 0.2s ease;
-}
-
-.btn-final:active {
-    transform: scale(0.95);
-}
-
-.btn-back-final {
-    background-color: #3a7d44;
-}
-
-.btn-final:hover {
-    filter: brightness(1.12);
-}
 
 /* ========================
    HIỆU ỨNG MƯA CÁNH HOA
@@ -2018,11 +1799,24 @@ body {
 }
 
 .final2-stamp {
-    width: 100px;
+    width: 110px;
     height: auto;
     opacity: 0.85;
     filter: grayscale(0.1) contrast(1.05);
-    flex-shrink: 0;
+    display: block;
+}
+
+/* title */
+
+.final2-title {
+    font-family: 'Beautique Display', 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 26px;
+    color: #1d3557;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 8px;
 }
 
 /* Đoạn văn mô tả */
@@ -2036,170 +1830,15 @@ body {
     padding: 0 2px;
 }
 
-/* ---- COLLAGE WRAPPER ---- */
-.final2-collage-wrap {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 20px;
-    padding: 0 10px;
-}
-
-/* Dot vàng bên trái */
-.final2-dots-left {
-    position: absolute;
-    left: -2px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 5;
-}
-
-.final2-dot {
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
-}
-
-/* Cành khô phải */
-.final2-branch-right {
-    position: absolute;
-    right: -12px;
-    top: 30px;
-    width: 75px;
-    height: auto;
-    z-index: 5;
-    pointer-events: none;
-    transform: rotate(10deg);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
-}
-
-/* Hàng ảnh */
-.final2-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 14px;
-    width: 100%;
-    position: relative;
-    z-index: 10;
-}
-
-/* Khung Polaroid */
-.final2-polaroid {
-    position: relative;
-    background: #ffffff;
-    padding: 6px 6px 18px 6px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14), 0 2px 4px rgba(0, 0, 0, 0.07);
-    border-radius: 2px;
-    width: 42%;
-    max-width: 160px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default;
-}
-
-.final2-polaroid-large {
-    width: 56%;
-    max-width: 210px;
-}
-
-.final2-row-bot .final2-polaroid {
-    width: 30%;
-    max-width: 120px;
-}
-
-.final2-photo {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    aspect-ratio: 1.1 / 1;
-}
-
-.final2-polaroid-large .final2-photo {
-    aspect-ratio: 1.4 / 1;
-}
-
-.final2-row-bot .final2-photo {
-    aspect-ratio: 1 / 1;
-}
-
-/* Ghim vàng trên mỗi ảnh */
-.final2-pin {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    z-index: 12;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-}
-
-/* Rotation helpers */
-.rot-neg-8 {
-    transform: rotate(-8deg);
-}
-
-.rot-neg-6 {
-    transform: rotate(-6deg);
-}
-
-.rot-neg-4 {
-    transform: rotate(-4deg);
-}
-
-.rot-neg-3 {
-    transform: rotate(-3deg);
-}
-
-.rot-pos-4 {
-    transform: rotate(4deg);
-}
-
-.rot-pos-6 {
-    transform: rotate(6deg);
-}
-
-.final2-polaroid:hover {
-    transform: rotate(0deg) scale(1.05) !important;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-    z-index: 20;
-}
-
-/* Swirl arrows giữa các hàng */
-.final2-swirl-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    padding: 0 20px;
-    height: 42px;
-    position: relative;
-    z-index: 10;
-}
-
-.final2-swirl {
-    width: 60px;
-    height: 42px;
-    flex-shrink: 0;
-}
 
 /* ---- PHẦN CHỮ KÝ ---- */
 .final2-signature {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    margin-left: auto;
+    max-width: 160px;
     padding-right: 14px;
     margin-bottom: 8px;
 }
@@ -2209,12 +1848,14 @@ body {
     font-size: 12px;
     color: #5c3d2e;
     margin-bottom: 4px;
+    text-align: center;
 }
 
 .final2-sign-img {
-    width: 90px;
+    width: 110px;
     height: auto;
     margin-bottom: 4px;
+    display: block;
 }
 
 .final2-sign-name {
@@ -2222,18 +1863,21 @@ body {
     font-size: 13px;
     font-weight: bold;
     color: #1d3557;
+    text-align: center;
+    white-space: nowrap;
 }
 
 /* ---- HOA KHÔ DƯỚI TRÁI ---- */
 .final2-flower-bottom-left {
     position: relative;
-    left: -10px;
-    width: 120px;
-    height: auto;
-    margin-top: 5px;
+    left: -120px;
+    width: 300px;
+    height: 301uto;
+    margin-top: -250px;
     pointer-events: none;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.07));
     z-index: 5;
+    transform: rotate(10deg);
 }
 
 /* ---- NÚT QUAY LẠI ---- */
@@ -2241,23 +1885,11 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: -100px;
     position: relative;
     z-index: 10;
 }
 
-/* Cành cây khô góc phải màn hình (fixed) */
-.final2-decor-right {
-    position: fixed;
-    right: -20px;
-    bottom: 60px;
-    width: 130px;
-    height: auto;
-    z-index: 1;
-    pointer-events: none;
-    opacity: 0.75;
-    transform: rotate(-15deg) scaleX(-1);
-}
 
 /* Responsive */
 @media (max-width: 768px) {

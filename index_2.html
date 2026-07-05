@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thu moi - Le Tot Nghiep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="transition-overlay active" id="overlay"></div>
+
+    <div class="page2-card" id="letter-card">
+
+        <div class="stamp-area">
+            <img src="asset/Webp/postage mark_vector.webp" alt="Dau moc buu dien" class="stamp-mark">
+        </div>
+
+        <div class="salutation-row">
+            <span class="salutation-label">Kính gửi:</span>
+            <span class="salutation-name" id="fullname-placeholder">Nguyễn Văn A</span>
+        </div>
+
+        <p class="letter-body">
+            Hành trình học tập 4 năm đại học tuy có những khó khăn, thử thách nhưng cũng đong đầy
+            những kỷ niệm đẹp cùng thầy cô và bạn bè. Hôm nay, chúng mình đã chính thức bước sang
+            một trang mới trong cuộc đời.
+        </p>
+
+        <p class="letter-body">
+            Trân trọng kính mời <strong id="nickname-placeholder">bạn</strong> đến chung vui, ghi lại
+            những khoảnh khắc ý nghĩa và tham dự Lễ tốt nghiệp của chúng mình vào lúc
+            <strong>8h30 sáng</strong> tại <strong>Nhà hát Sông Hương</strong>.
+        </p>
+
+        <button class="btn-navigate" id="next-btn">Xem nội dung chi tiết</button>
+
+        <img src="asset/Webp/j8ejkadimxlopurzaex8.webp" alt="Hoa kho" class="flower-card-left">
+    </div>
+
+    <audio id="bg-audio" src="asset/Music/Và Thế Giới Đã Mất Đi Một Người Cô Đơn.mp3" loop></audio>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const audio = document.getElementById('bg-audio');
+        const nextBtn = document.getElementById('next-btn');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => { overlay.classList.remove('active'); }, 100);
+
+            const fullname = localStorage.getItem('fullname') || 'Nguyễn Văn A';
+            const nickname = localStorage.getItem('nickname') || 'bạn';
+            document.getElementById('fullname-placeholder').textContent = fullname;
+            document.getElementById('nickname-placeholder').textContent = nickname;
+
+            const audioPlaying = localStorage.getItem('audioPlaying');
+            const savedTime = localStorage.getItem('audioCurrentTime');
+
+            if (audioPlaying === 'true') {
+                if (savedTime) audio.currentTime = parseFloat(savedTime);
+                audio.play().catch(() => {
+                    document.body.addEventListener('click', () => { audio.play(); }, { once: true });
+                });
+            } else {
+                audio.play().then(() => {
+                    localStorage.setItem('audioPlaying', 'true');
+                }).catch(() => {});
+            }
+
+            const timeUpdater = setInterval(() => {
+                if (!audio.paused) localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
+            }, 1000);
+
+            nextBtn.addEventListener('click', () => {
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    clearInterval(timeUpdater);
+                    window.location.href = 'index_3.html';
+                }, 800);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -14,18 +14,18 @@
 
     <div class="main-container">
         <!-- Dấu mộc bưu điện -->
-        <img src="asset/postage mark_vector.png" alt="Postage Stamp" class="postage-stamp">
+        <img src="asset/Webp/postage mark_vector.webp" alt="Postage Stamp" class="postage-stamp">
 
         <!-- Container Phong bì -->
         <div class="envelope-container" id="envelope">
             <!-- Ảnh phong bì đóng/mở -->
-            <img src="asset/letter_close.png" alt="Envelope" class="envelope-img" id="envelope-img">
+            <img src="asset/Webp/letter_close.webp" alt="Envelope" class="envelope-img" id="envelope-img">
             
             <!-- Vệt màu nền cọ quét -->
             <div class="brush-stroke"></div>
 
             <!-- Cành hoa khô đè lên -->
-            <img src="asset/hoa.png" alt="Dried Flower Decor" class="flower-on-envelope" id="flower-decor">
+            <img src="asset/Webp/mxpulqr9fk7tmteja9y8.webp" alt="Dried Flower Decor" class="flower-on-envelope" id="flower-decor">
 
             <!-- Băng keo dán trang trí -->
             <div class="washi-tape-green"></div>
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Nhạc nền chạy ngầm -->
-    <audio id="bg-audio" src="asset/intro_nhacke.MP3" loop></audio>
+    <audio id="bg-audio" src="asset/Music/intro_nhacke.MP3" loop></audio>
 
     <script>
         const envelope = document.getElementById('envelope');
@@ -60,7 +60,7 @@
                 envelope.classList.add('open');
                 
                 // Thay đổi hình ảnh sang phong bì mở
-                envelopeImg.src = 'asset/letter_open.png';
+                envelopeImg.src = 'asset/Webp/letter_open.webp';
                 actionText.textContent = 'Đang mở thư...';
 
                 // Phát nhạc nền (vì người dùng đã click nên trình duyệt sẽ cho phép phát nhạc)
