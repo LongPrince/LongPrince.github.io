@@ -51,6 +51,16 @@ body {
     position: relative;
     font-family: var(--text-typewriter);
     color: var(--color-dark);
+    /* Ẩn thanh cuộn cho IE và Edge */
+    -ms-overflow-style: none;
+    /* Ẩn thanh cuộn cho Firefox */
+    scrollbar-width: none;
+}
+
+/* Ẩn thanh cuộn cho Chrome, Safari và Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none;
 }
 
 /* ==========================================================================
@@ -227,9 +237,9 @@ body {
 
 .sunflower-corner {
     position: absolute;
-    right: -40px;
-    top: -40px;
-    width: 260px;
+    right: -90px;
+    top: -60px;
+    width: 360px;
     height: auto;
     pointer-events: none;
     z-index: 5;
@@ -240,9 +250,9 @@ body {
 
 .dried-flower-corner {
     position: absolute;
-    left: -20px;
-    bottom: -30px;
-    width: 220px;
+    left: -50px;
+    bottom: -220px;
+    width: 500px;
     height: auto;
     pointer-events: none;
     z-index: 5;
@@ -482,7 +492,7 @@ body {
 
 .form-flower-right-decor {
     position: absolute;
-    right: -10px;
+    right: -100px;
     bottom: -20px;
     width: 260px;
     height: auto;
@@ -677,7 +687,7 @@ body {
 }
 
 /* ==========================================================================
-   TRANG HƯỚNG DẪN / TIMELINE CHƯƠNG TRÌNH - PAGE 3 (ĐÃ ĐIỀU CHỈNH)
+   TRANG HƯỚNG DẪN / TIMELINE CHƯƠNG TRÌNH - PAGE 3 
    ========================================================================== */
 
 .page3-layout-container {
@@ -841,7 +851,7 @@ body {
     background-color: #730000;
 }
 
-/* Các lớp hoa lá decor được PHÓNG TO và định vị tinh tế */
+/* Các lớp hoa lá decor*/
 .decor-leaf-top-right-outside {
     position: absolute;
     top: -30px;
@@ -852,19 +862,9 @@ body {
     pointer-events: none;
     z-index: 2;
     filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.08));
+
 }
 
-.decor-leaf-mid-right {
-    position: absolute;
-    top: 36%;
-    right: -20px;
-    width: 130px;
-    /* Đã phóng to từ 60px */
-    height: auto;
-    pointer-events: none;
-    z-index: 2;
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.05));
-}
 
 .decor-flower-bottom-left {
     position: absolute;
@@ -910,15 +910,15 @@ body {
 
     /* TRANG 2 */
     .sunflower-corner {
-        width: 160px;
-        right: -20px;
-        top: -20px;
+        width: 260px;
+        right: -50px;
+        top: -50px;
     }
 
     .dried-flower-corner {
-        width: 140px;
-        left: -15px;
-        bottom: -20px;
+        width: 350px;
+        left: -35px;
+        bottom: -50px;
     }
 
     .loading-wrapper {
@@ -951,14 +951,14 @@ body {
     }
 
     .form-flower-left-decor {
-        width: 130px;
-        left: -15px;
-        bottom: -20px;
+        width: 150px;
+        left: -30px;
+        bottom: -50px;
     }
 
     .form-flower-right-decor {
-        width: 180px;
-        right: -10px;
+        width: 200px;
+        right: -50px;
         bottom: -15px;
     }
 
@@ -1004,7 +1004,9 @@ body {
     }
 
     .flower-card-left {
-        width: 100px;
+        width: 200px;
+        bottom: -60px;
+        left: -30px;
     }
 
     .letter-body {
@@ -1038,19 +1040,21 @@ body {
 
     /* Thu nhỏ tỷ lệ hoa lá một chút trên Mobile để vừa vặn màn hình */
     .decor-flower-bottom-left {
-        width: 160px;
+        width: 200px;
         left: -20px;
-        bottom: -20px;
+        bottom: -80px;
     }
 
     .decor-leaf-top-right-outside {
-        width: 150px;
-        right: -25px;
-        top: -20px;
+        width: 250px;
+        right: -60px;
+        top: -30px;
+        transform: rotate(160deg);
+
     }
 
     .decor-leaf-mid-right {
-        width: 90px;
+        width: 200px;
         right: -10px;
     }
 }
@@ -1126,6 +1130,7 @@ body {
     width: 100%;
     max-width: 520px;
     min-height: 100vh;
+    overflow: hidden;
     position: relative;
     padding: 30px 15px 40px 15px;
     overflow-x: hidden;
@@ -1353,13 +1358,13 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom: -50px;
+    margin-top: 0px;
+    margin-bottom: -200px;
     pointer-events: none;
 }
 
 .bottom-flower-decor {
-    width: 90px;
+    width: 200px;
     height: auto;
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.05));
 }
@@ -1384,7 +1389,7 @@ body {
     }
 
     .bottom-flower-decor {
-        width: 80px;
+        width: 200px;
     }
 }
 
@@ -1413,6 +1418,7 @@ body {
     width: 100%;
     max-width: 520px;
     min-height: 100vh;
+
     position: relative;
     padding: 30px 20px 50px 20px;
     display: flex;
@@ -1608,7 +1614,7 @@ body {
 
 /* Decor lá góc ngoài trang 7 */
 .decor-leaf-top-left-p7 {
-    position: fixed;
+    position: absolute;
     top: -20px;
     left: -25px;
     width: 160px;
@@ -1620,15 +1626,15 @@ body {
 }
 
 .decor-leaf-bottom-right-p7 {
-    position: fixed;
-    bottom: -30px;
-    right: -20px;
+    position: absolute;
+    bottom: 120px;
+    right: -40px;
     width: 200px;
     height: auto;
     z-index: 1;
     pointer-events: none;
     opacity: 0.85;
-    transform: rotate(-10deg) scaleX(-1);
+    transform: rotate(-100px) scaleX(-1);
 }
 
 /* Nhóm nút trang 7 */
@@ -1637,7 +1643,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 45px;
-    margin-top: 35px;
+    margin-top: 105px;
     width: 100%;
     z-index: 10;
     position: relative;
@@ -1749,12 +1755,12 @@ body {
 
     .decor-leaf-top-left-p7,
     .final-leaf-left {
-        width: 120px;
+        width: 150px;
     }
 
     .decor-leaf-bottom-right-p7,
     .final-leaf-right {
-        width: 140px;
+        width: 200px;
     }
 }
 
@@ -1784,7 +1790,9 @@ body {
     padding: 24px 18px 50px 18px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    /* CHỈNH SỬA 2 DÒNG DƯỚI ĐÂY */
+    align-items: center;
+    margin: 0 auto;
     z-index: 10;
     overflow-x: hidden;
 }
@@ -1867,17 +1875,24 @@ body {
     white-space: nowrap;
 }
 
+
 /* ---- HOA KHÔ DƯỚI TRÁI ---- */
 .final2-flower-bottom-left {
-    position: relative;
-    left: -120px;
-    width: 300px;
-    height: 301uto;
-    margin-top: -250px;
+    position: absolute;
+    bottom: auto;
+
+    top: 75%;
+
+    left: -100px;
+
+    width: 200px;
+
+    height: auto;
     pointer-events: none;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.07));
     z-index: 5;
-    transform: rotate(10deg);
+    transform: rotate(15deg);
+
 }
 
 /* ---- NÚT QUAY LẠI ---- */
@@ -1885,11 +1900,15 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: -100px;
+    margin-top: 25px;
     position: relative;
     z-index: 10;
 }
 
+.final2-btn-group button,
+.final2-btn-group .btn-final {
+    font-family: var(--text-typewriter) !important;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -1907,6 +1926,12 @@ body {
 
     .final2-row-bot .final2-polaroid {
         max-width: 105px;
+    }
+
+    .final2-flower-bottom-left {
+        width: 200px;
+        left: -50px;
+        bottom: -20px;
     }
 }
 
