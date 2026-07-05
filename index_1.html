@@ -40,10 +40,12 @@
             </div>
 
             <div class="input-group">
-                <input type="tel" id="phone" placeholder="Số điện thoại" required>
+                <!-- Ràng buộc HTML: Phải nhập đúng 10 chữ số bắt đầu bằng số 0 -->
+                <input type="tel" id="phone" placeholder="Số điện thoại (10 số)" pattern="0[0-9]{9}"
+                    title="Số điện thoại phải gồm đúng 10 chữ số và bắt đầu bằng số 0" required>
             </div>
 
-            <button type="submit" class="btn-submit">Tiếp tục</button>
+            <button type="submit" class="btn-submit" id="btn-submit">Tiếp tục</button>
 
             <div class="video-container" style="margin-top: 15px;">
                 <video class="khabanh-video" autoplay loop muted playsinline
@@ -55,67 +57,112 @@
         </form>
     </div>
 
-    <!-- Nhạc nền chạy ngầm bài "Và Thế Giới Đã Mất Đi Một Người Cô Đơn" -->
+    <!-- Nhạc nền chạy ngầm -->
     <audio id="bg-audio" src="asset/Music/Và-Thế-Giới-Đã-Mất-Đi-Một-Người-Cô-Đơn.ogg" loop></audio>
 
-    <script>
+    <!-- Nhúng các module Firebase từ CDN để chạy trực tiếp trên trình duyệt -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+        // Cấu hình Firebase thực tế của bạn
+        const firebaseConfig = {
+            apiKey: "AIzaSyBF9lN3JxFqikHwJlMa9WqFPLJvM2Vr5uY",
+            authDomain: "graduation-a4709.firebaseapp.com",
+            databaseURL: "https://graduation-a4709-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "graduation-a4709",
+            storageBucket: "graduation-a4709.firebasestorage.app",
+            messagingSenderId: "329769709703",
+            appId: "1:329769709703:web:0cbfd9e5459b9937d54822",
+            measurementId: "G-NG7RJ3BDLB"
+        };
+
+        // Khởi tạo các dịch vụ Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Logic xử lý audio và chuyển trang
         const overlay = document.getElementById('overlay');
         const audio = document.getElementById('bg-audio');
 
-        // Khi trang web tải xong, ẩn overlay mờ dần
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 overlay.classList.remove('active');
             }, 100);
 
-            // Kiểm tra xem nhạc có đang phát ở trang trước không và tiếp tục phát
             const audioPlaying = localStorage.getItem('audioPlaying');
             const savedTime = localStorage.getItem('audioCurrentTime');
 
             if (audioPlaying === 'true') {
-                if (savedTime) {
-                    audio.currentTime = parseFloat(savedTime);
-                }
+                if (savedTime) audio.currentTime = parseFloat(savedTime);
                 audio.play().catch(err => {
-                    console.log("Audio resume blocked by browser. Attempting play on user action:", err);
-                    document.body.addEventListener('click', () => {
-                        audio.play();
-                    }, { once: true });
+                    document.body.addEventListener('click', () => { audio.play(); }, { once: true });
                 });
             } else {
                 audio.play().then(() => {
                     localStorage.setItem('audioPlaying', 'true');
-                }).catch(err => {
-                    console.log("Autoplay blocked:", err);
-                });
+                }).catch(err => console.log("Autoplay blocked:", err));
             }
 
-            // Tự động lưu thời gian nhạc đang chạy liên tục
-            const timeUpdater = setInterval(() => {
+            setInterval(() => {
                 if (!audio.paused) {
                     localStorage.setItem('audioCurrentTime', audio.currentTime.toString());
                 }
             }, 1000);
         });
 
-        // Xử lý sự kiện submit form (lưu thông tin vào localStorage và chuyển trang)
+        // Xử lý sự kiện submit form và đẩy dữ liệu lên Firebase Cloud
         const form = document.getElementById('info-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const fullname = document.getElementById('fullname').value;
-            const nickname = document.getElementById('nickname').value;
-            const phone = document.getElementById('phone').value;
+        const btnSubmit = document.getElementById('btn-submit');
 
-            // Lưu thông tin vào localStorage
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Lấy giá trị và loại bỏ khoảng trắng thừa ở hai đầu đầu vào
+            const fullname = document.getElementById('fullname').value.trim();
+            const nickname = document.getElementById('nickname').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            // CHỈ KIỂM TRA ĐIỀU KIỆN SỐ ĐIỆN THOẠI (10 chữ số bắt đầu bằng số 0)
+            const phoneRegex = /^0[0-9]{9}$/;
+            if (!phoneRegex.test(phone)) {
+                alert("Số điện thoại không hợp lệ! Vui lòng nhập đúng 10 chữ số bắt đầu bằng số 0.");
+                return;
+            }
+
+            // Khóa nút bấm để tránh double-click gửi trùng dữ liệu
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Đang lưu...";
+
+            // Lưu tạm vào localStorage để trang sau sử dụng nếu cần
             localStorage.setItem('fullname', fullname);
             localStorage.setItem('nickname', nickname);
             localStorage.setItem('phone', phone);
 
-            // Kích hoạt overlay chuyển trang trước khi chuyển hướng
-            overlay.classList.add('active');
-            setTimeout(() => {
-                window.location.href = 'index_2.html';
-            }, 800);
+            try {
+                // Đẩy dữ liệu lên Firebase
+                const userListRef = ref(database, 'users_info');
+                const newUserRef = push(userListRef);
+
+                await set(newUserRef, {
+                    fullname: fullname,
+                    nickname: nickname,
+                    phone: phone,
+                    createdAt: new Date().toISOString()
+                });
+
+                // Chuyển trang mượt mà
+                overlay.classList.add('active');
+                setTimeout(() => {
+                    window.location.href = 'index_2.html';
+                }, 800);
+
+            } catch (error) {
+                console.error("Lỗi khi lưu dữ liệu: ", error);
+                alert("Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại!");
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "Tiếp tục";
+            }
         });
     </script>
 </body>
