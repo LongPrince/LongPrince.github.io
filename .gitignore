@@ -1,0 +1,30 @@
+# Bỏ qua file lớn không phù hợp với GitHub Pages
+# Video files
+*.mp4
+*.webm
+*.mov
+*.avi
+
+# Large images & GIF
+*.gif
+
+# Audio files  
+*.mp3
+*.wav
+*.ogg
+
+# PDF files
+*.pdf
+
+# File hệ thống
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Node modules (nếu dùng sau này)
+node_modules/
