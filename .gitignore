@@ -8,8 +8,8 @@
 # Large images & GIF
 *.gif
 
-# Audio files  
-*.mp3
+# Audio files (MP3 nhỏ < 25MB vẫn được phép)
+# *.mp3
 *.wav
 *.ogg
 
