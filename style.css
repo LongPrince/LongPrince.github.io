@@ -1180,7 +1180,7 @@ html::-webkit-scrollbar {
 
 .location-text {
     font-family: var(--text-typewriter);
-    font-size: 10px;
+    font-size: 15px;
     line-height: 1.8;
     color: #4a3e3d;
     width: 50%;
@@ -1190,7 +1190,7 @@ html::-webkit-scrollbar {
 
 /* Khung ảnh địa điểm đơn giản (không viền Polaroid) */
 .polaroid-wrapper {
-    width: 45%;
+    width: 100%;
     position: relative;
     border-radius: 4px;
     overflow: hidden;
@@ -1380,7 +1380,7 @@ html::-webkit-scrollbar {
     }
 
     .location-text {
-        font-size: 9px;
+        font-size: 14px;
         line-height: 1.6;
     }
 
@@ -1404,8 +1404,8 @@ html::-webkit-scrollbar {
     }
 
     .location-text {
-        font-size: 8px;
-        line-height: 1.5;
+        font-size: 10px;
+        line-height: 2.5;
     }
 }
 
@@ -1951,4 +1951,58 @@ html::-webkit-scrollbar {
     .final2-row-bot .final2-polaroid {
         width: 30%;
     }
+}
+
+/* ---- FOOTER TRANG CUỐI ---- */
+.final-footer {
+    margin-top: 35px;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.final-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+.final-social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(59, 82, 73, 0.1);
+    /* Màu rêu nhạt */
+    color: #3b5249;
+    /* Màu rêu */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.final-social-icon:hover {
+    background-color: #3b5249;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+.final-social-icon svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+.final-copyright {
+    font-family: var(--text-typewriter);
+    font-size: 10.5px;
+    color: #5c3d2e;
+    line-height: 1.5;
+    opacity: 0.85;
 }
