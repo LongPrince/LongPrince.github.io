@@ -2006,3 +2006,33 @@ html::-webkit-scrollbar {
     line-height: 1.5;
     opacity: 0.85;
 }
+
+/* Logo CLB styles */
+.loading-logo-clb {
+    width: 140px;
+    height: auto;
+    margin-bottom: 25px;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.loading-logo-clb:hover {
+    transform: scale(1.05);
+}
+
+.final-logo-clb-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    z-index: 10;
+}
+
+.final-logo-clb {
+    width: 280px;
+    height: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+}

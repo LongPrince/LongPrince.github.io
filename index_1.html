@@ -41,9 +41,9 @@
             </div>
 
             <div class="input-group">
-                <!-- Ràng buộc HTML: Phải nhập đúng 10 chữ số bắt đầu bằng số 0 -->
-                <input type="tel" id="phone" placeholder="Số điện thoại " pattern="0[0-9]{9}"
-                    title="Số điện thoại phải gồm đúng 10 chữ số và bắt đầu bằng số 0" required>
+                <!-- Ràng buộc HTML: Nhập đúng định dạng số điện thoại nhà mạng Việt Nam -->
+                <input type="tel" id="phone" placeholder="Số điện thoại " pattern="^(03[2-9]|05[25689]|07[06-9]|08[1-9]|09[0-9])[0-9]{7}$"
+                    title="Số điện thoại phải thuộc nhà mạng Việt Nam (10 chữ số, bắt đầu bằng các đầu số di động hợp lệ)" required>
             </div>
 
             <button type="submit" class="btn-submit" id="btn-submit">Tiếp tục</button>
@@ -124,10 +124,41 @@
             const nickname = document.getElementById('nickname').value.trim();
             const phone = document.getElementById('phone').value.trim();
 
-            // CHỈ KIỂM TRA ĐIỀU KIỆN SỐ ĐIỆN THOẠI (10 chữ số bắt đầu bằng số 0)
-            const phoneRegex = /^0[0-9]{9}$/;
+            // 1. Kiểm tra độ dài tối thiểu
+            if (fullname.length < 2) {
+                alert("Họ & tên phải từ 2 ký tự trở lên!");
+                return;
+            }
+            if (nickname.length < 2) {
+                alert("Biệt danh phải từ 2 ký tự trở lên!");
+                return;
+            }
+
+            // 2. Chống spam chỉ chứa toàn dấu chấm hoặc khoảng trắng
+            const punctuationOnlyRegex = /^[.\s]+$/;
+            if (punctuationOnlyRegex.test(fullname) || punctuationOnlyRegex.test(nickname)) {
+                alert("Họ & tên hoặc Biệt danh không được chỉ chứa dấu chấm hoặc khoảng trắng!");
+                return;
+            }
+
+            // 3. Chặn chuỗi dấu chấm liên tiếp "...."
+            const dotRegex = /\.{4,}/;
+            if (dotRegex.test(fullname) || dotRegex.test(nickname)) {
+                alert("Họ & tên hoặc Biệt danh không được chứa chuỗi dấu chấm liên tiếp '....'!");
+                return;
+            }
+
+            // 4. Chặn các ký tự HTML nguy hiểm để chống XSS
+            const xssRegex = /[<>]/;
+            if (xssRegex.test(fullname) || xssRegex.test(nickname)) {
+                alert("Họ & tên hoặc Biệt danh không được chứa các ký tự đặc biệt '<' hoặc '>'!");
+                return;
+            }
+
+            // 5. Kiểm tra định dạng số điện thoại nhà mạng Việt Nam
+            const phoneRegex = /^(03[2-9]|05[25689]|07[06-9]|08[1-9]|09[0-9])[0-9]{7}$/;
             if (!phoneRegex.test(phone)) {
-                alert("Số điện thoại không hợp lệ! Vui lòng nhập đúng 10 chữ số bắt đầu bằng số 0.");
+                alert("Số điện thoại không hợp lệ hoặc không thuộc nhà mạng Việt Nam nào! Vui lòng kiểm tra lại.");
                 return;
             }
 
